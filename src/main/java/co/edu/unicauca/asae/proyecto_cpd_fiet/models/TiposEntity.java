@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.Models;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,19 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Getter
-@Setter
+@Getter@Setter
 @AllArgsConstructor
 @Entity
-@Table(name = "publicaciones")
-public class PublicacionesEntity {
+@Table(name = "tipos")
+public class TiposEntity {
     @Id
-    private Integer idPublicacion;
+    private Integer idTipo;
 
     @Column
-    private Integer idTipo;
-    @Column
-    private String titulo;
-    @Column
-    private String area;
+    private String nombre;
 }

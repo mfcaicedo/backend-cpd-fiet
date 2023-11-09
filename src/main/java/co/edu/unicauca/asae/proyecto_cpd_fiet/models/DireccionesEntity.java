@@ -1,16 +1,19 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.Models;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+
+@Entity
+@Table(name = "direcciones")
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity
-@Table(name = "direcciones")
+@NoArgsConstructor
 public class DireccionesEntity {
 
     @Id

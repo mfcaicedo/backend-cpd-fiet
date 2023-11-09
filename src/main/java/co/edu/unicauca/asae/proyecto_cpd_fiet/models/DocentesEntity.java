@@ -1,6 +1,5 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.Models;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,11 +7,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Getter
-@Setter
+
 
 @Entity
 @Table(name = "docentes")
+@Getter
+@Setter
+/*@AllArgsConstructor
+@NoArgsConstructor*/
 public class DocentesEntity extends PersonasEntity{
 
     public DocentesEntity(Integer idPersona, String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, DireccionesEntity direccion, String correo, String vinculacion, String departamento) {
