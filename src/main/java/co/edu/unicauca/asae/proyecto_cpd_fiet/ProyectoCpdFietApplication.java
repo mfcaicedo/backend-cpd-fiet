@@ -13,6 +13,7 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Publicacion;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Tipo;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.DocentesRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.PublicacionesRepository;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.TiposRepository;
 
 @SpringBootApplication
 public class ProyectoCpdFietApplication implements CommandLineRunner {
@@ -22,6 +23,10 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 
 	@Autowired
 	private PublicacionesRepository servicioBDPublicaciones;
+
+	
+	@Autowired
+	private TiposRepository servicioBDTipos;
 
 
 
@@ -33,6 +38,7 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		guardarDocentes();
 		registrarPublicacion();
+		consultarPublicaciones();
 	}
 
 	private void guardarDocentes() {
@@ -49,12 +55,23 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 	private void registrarPublicacion() {
 		Tipo tipo = new Tipo();
 		tipo.setNombre("Arte");
+		tipo = servicioBDTipos.save(tipo);
 		Publicacion objPublicacion1 = new Publicacion(1, "El arte de la guerra", "Historia", tipo);
 		Publicacion objPublicacion2 = new Publicacion(2, "Game of thrones", "Fantasia", tipo);
 		List<Publicacion> listaPublicaciones = new LinkedList();
 		listaPublicaciones.add(objPublicacion1);
 		listaPublicaciones.add(objPublicacion2);
 		this.servicioBDPublicaciones.saveAll(listaPublicaciones);
+	}
+
+	private void consultarPublicaciones() {
+		Iterable<Publicacion> listaPublicaciones = this.servicioBDPublicaciones.findAll();
+		for (Publicacion publicacion : listaPublicaciones) {
+			System.out.println("Id publicación: " + publicacion.getIdPublicacion());
+			System.out.println("Area: " + publicacion.getArea());
+			System.out.println("Titulo: " + publicacion.getTitulo());
+			System.out.println("Titulo: " + publicacion.getTipo());
+		}
 	}
 
 }
