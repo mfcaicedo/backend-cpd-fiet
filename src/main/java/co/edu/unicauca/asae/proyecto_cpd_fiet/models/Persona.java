@@ -8,13 +8,13 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "personas")
+@Table(name = "persona")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonasEntity {
+public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,4 @@ public class PersonasEntity {
     @Column
     private String apellidos;
 
-    @OneToOne(mappedBy = "idPersona")
-    private DireccionesEntity direccion;
 }

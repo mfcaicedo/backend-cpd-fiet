@@ -9,26 +9,24 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "direcciones")
+@Table(name = "direccion")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DireccionesEntity {
+public class Direccion {
 
     @Id
-    @GeneratedValue
-    private Integer idDireccion;
-
+    @Column(name = "idPersona")
+    private Integer idPersona;
     @OneToOne
+    @MapsId
     @JoinColumn(name = "idPersona")
-    private PersonasEntity idPersona;
+    private Docente docente;
     @Column
     private String direccionResidencia;
-
     @Column
     private String ciudad;
-
     @Column
     private String pais;
 }
