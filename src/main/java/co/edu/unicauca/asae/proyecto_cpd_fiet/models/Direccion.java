@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "direccion")
 @Getter
@@ -16,17 +15,28 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Direccion {
 
+    // @Id
+    // @Column(name = "idPersona")
+    // private Integer idPersona;
     @Id
-    @Column(name = "idPersona")
-    private Integer idPersona;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "idPersona")
-    private Docente docente;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idDireccion")
+    private Integer idDireccion;
+
     @Column
     private String direccionResidencia;
     @Column
     private String ciudad;
     @Column
     private String pais;
+
+    // Otros atributos de la clase Direccion
+
+    @OneToOne
+    //@MapsId
+    //@JoinColumn(name = "idPersona", referencedColumnName = "idPersona") // especifica la columna referenciada
+    @JoinColumn(name = "idPersona") // especifica la columna referenciada
+    private Docente docente;
+
+    // Getters y setters
 }

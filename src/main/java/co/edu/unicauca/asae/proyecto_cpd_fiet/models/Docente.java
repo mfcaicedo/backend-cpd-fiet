@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,10 +30,8 @@ public class Docente extends Persona {
     private String departamento;
 
     @OneToOne(mappedBy = "docente", cascade = CascadeType.PERSIST)
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
     private Direccion direccion;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "docentePublicacion", joinColumns = @JoinColumn(name = "idPersona"), inverseJoinColumns = @JoinColumn(name = "idPublicacion"))
-    private List<Publicacion> listPublicaciones;
-
+    @ManyToMany(mappedBy = "docentePublicacion", fetch = FetchType.LAZY)
+    private List<Publicacion> publicaciones;
 }
