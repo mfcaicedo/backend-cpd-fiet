@@ -40,22 +40,56 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 	}
 
 	private void guardarDocentes() {
-		Docente objDocente1 = new Docente(1, "Cedula", "1002971825", "Piter", "Alveiro", "asdasd@unicauca.edu.co",
+		Docente objDocente1 = new Docente( "Cedula", "1002971825", "Piter", "Alveiro", "asdasd@unicauca.edu.co",
 				"2017", "Telematica");
-		Docente objDocente2 = new Docente(2, "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
+		Docente objDocente2 = new Docente( "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
 				"2015", "Sistemas");
+
+
+		Docente objDocente3 = new Docente( "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
+				"2015", "Sistemas");
+
+
 		List<Docente> listaDocentes = new LinkedList();
+		listaDocentes.add(objDocente1);
+		listaDocentes.add(objDocente2);
+		listaDocentes.add(objDocente3);
 
 		Direccion objDireccion1 =  new Direccion();
 		objDireccion1.setCiudad("Popayan");
 		objDireccion1.setDireccionResidencia("Calle 26 EN #4-50");
 		objDireccion1.setPais("Colombia");
+
+
+
 		objDireccion1.setDocente(objDocente1);
 		objDocente1.setDireccion(objDireccion1);
-		//listaDocentes.add(objDocente1);
-		//listaDocentes.add(objDocente2);
-		//this.servicioBDDocentes.saveAll(listaDocentes);
-		this.servicioBDDocentes.save(objDocente1);
+
+		//this.servicioBDDocentes.save(objDocente1);
+
+
+		Direccion objDireccion2 =  new Direccion();
+		objDireccion2.setCiudad("Popayan");
+		objDireccion2.setDireccionResidencia("Calle 890i387 EN #4-50");
+		objDireccion2.setPais("Colombia");
+
+		objDireccion2.setDocente(objDocente2);
+		objDocente2.setDireccion(objDireccion2);
+
+
+		Direccion objDireccion3 =  new Direccion();
+		objDireccion3.setCiudad("Popayan");
+		objDireccion3.setDireccionResidencia("Calle 0000 EN #4-50");
+		objDireccion3.setPais("Colombia");
+
+		objDireccion3.setDocente(objDocente3);
+		objDocente3.setDireccion(objDireccion3);
+
+
+
+		this.servicioBDDocentes.saveAll(listaDocentes);
+
+		//this.servicioBDDocentes.save(objDocente2);
 	}
 
 	
@@ -78,12 +112,14 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 	private void consultarPublicaciones() {
 		Iterable<Publicacion> listaPublicaciones = this.servicioBDPublicaciones.findAll();
 		for (Publicacion publicacion : listaPublicaciones) {
+			System.out.println("----");
 			System.out.println("Id publicación: " + publicacion.getIdPublicacion());
 			System.out.println("Area: " + publicacion.getArea());
 			System.out.println("Titulo: " + publicacion.getTitulo());
 			System.out.println("Tipo: " + publicacion.getTipo().getNombre());
-			System.out.println("Docentes: ");
+			System.out.print("Docentes: ");
 			publicacion.getDocentePublicacion().forEach(docente -> System.out.println(docente.getNombres()));
+			System.out.println("------ \n\n");
 		}
 	}
 

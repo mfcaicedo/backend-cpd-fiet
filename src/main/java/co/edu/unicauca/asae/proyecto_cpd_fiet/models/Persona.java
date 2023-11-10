@@ -28,4 +28,10 @@ public class Persona {
     @Column
     private String apellidos;
 
+    public Persona(String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos) {
+        this.tipoIdentificacion = tipoIdentificacion;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+    }
 }

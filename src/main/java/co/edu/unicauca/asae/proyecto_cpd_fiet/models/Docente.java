@@ -15,8 +15,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Docente extends Persona {
-    public Docente(Integer idPersona, String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion, String departamento) {
-        super(idPersona, tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
+    public Docente( String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion, String departamento) {
+        super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);
         this.correo = correo;
         this.vinculacion = vinculacion;
         this.departamento = departamento;

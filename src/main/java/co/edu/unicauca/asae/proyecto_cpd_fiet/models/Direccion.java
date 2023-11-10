@@ -16,17 +16,18 @@ import javax.persistence.*;
 public class Direccion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDireccion")
-    private Integer idDireccion;
+    @Column(name = "idPersona")
+    private Integer idPersona;
     @Column
     private String direccionResidencia;
     @Column
     private String ciudad;
     @Column
     private String pais;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name="idPersona")
     private Docente docente;
 
 }
