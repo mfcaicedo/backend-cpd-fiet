@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.repositories;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

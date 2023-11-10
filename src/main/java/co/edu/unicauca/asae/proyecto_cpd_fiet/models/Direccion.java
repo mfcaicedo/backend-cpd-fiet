@@ -1,27 +1,23 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "direccion")
+@Table(name = "direcciones")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@ToString
 public class Direccion {
 
-    // @Id
-    // @Column(name = "idPersona")
-    // private Integer idPersona;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDireccion")
-    private Integer idDireccion;
+    private Integer idPersona;
+
+   /* @Column
+    private Integer idPersona;
+*/
 
     @Column
     private String direccionResidencia;
@@ -30,13 +26,11 @@ public class Direccion {
     @Column
     private String pais;
 
-    // Otros atributos de la clase Direccion
-
     @OneToOne
-    //@MapsId
-    //@JoinColumn(name = "idPersona", referencedColumnName = "idPersona") // especifica la columna referenciada
-    @JoinColumn(name = "idPersona") // especifica la columna referenciada
+    @JoinColumn(name = "idPersona" ) // especifica la columna referenciada , referencedColumnName = "idPersona"
     private Docente docente;
 
-    // Getters y setters
+
+    public Direccion() {
+    }
 }
