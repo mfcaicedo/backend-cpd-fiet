@@ -15,9 +15,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Direccion {
 
-    // @Id
-    // @Column(name = "idPersona")
-    // private Integer idPersona;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDireccion")
@@ -28,10 +25,8 @@ public class Direccion {
     private String ciudad;
     @Column
     private String pais;
-    @OneToOne()
-    //@MapsId
-    //@JoinColumn(name = "idPersona", referencedColumnName = "idPersona") // especifica la columna referenciada
-    @JoinColumn(name = "idPersona")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     private Docente docente;
 
 }

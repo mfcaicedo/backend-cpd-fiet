@@ -21,16 +21,13 @@ public class Docente extends Persona {
         this.vinculacion = vinculacion;
         this.departamento = departamento;
     }
-
     @Column
     private String correo;
     @Column
     private String vinculacion;
     @Column
     private String departamento;
-
-    @OneToOne(mappedBy = "docente", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    //@PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "docente", cascade = CascadeType.ALL)
     private Direccion direccion;
     @ManyToMany(mappedBy = "docentePublicacion", fetch = FetchType.LAZY)
     private List<Publicacion> publicaciones;
