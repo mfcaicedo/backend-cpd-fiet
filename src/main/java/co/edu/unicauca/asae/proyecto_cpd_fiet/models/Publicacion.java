@@ -25,5 +25,8 @@ public class Publicacion {
     @ManyToOne
     @JoinColumn(name="idTipo", nullable=false)
     private Tipo tipo;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "docentePublicacion", joinColumns = @JoinColumn(name = "idPublicacion"), inverseJoinColumns = @JoinColumn(name = "idPersona"))
+    private List<Docente> docentePublicacion;
 
 }
