@@ -29,7 +29,7 @@ public class Docente extends Persona {
     @Column
     private String departamento;
 
-    @OneToOne(mappedBy = "docente", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "docente", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     //@PrimaryKeyJoinColumn
     private Direccion direccion;
     @ManyToMany(mappedBy = "docentePublicacion", fetch = FetchType.LAZY)

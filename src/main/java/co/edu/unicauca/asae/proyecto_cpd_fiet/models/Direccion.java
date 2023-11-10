@@ -22,21 +22,16 @@ public class Direccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idDireccion")
     private Integer idDireccion;
-
     @Column
     private String direccionResidencia;
     @Column
     private String ciudad;
     @Column
     private String pais;
-
-    // Otros atributos de la clase Direccion
-
-    @OneToOne
+    @OneToOne()
     //@MapsId
     //@JoinColumn(name = "idPersona", referencedColumnName = "idPersona") // especifica la columna referenciada
-    @JoinColumn(name = "idPersona") // especifica la columna referenciada
+    @JoinColumn(name = "idPersona")
     private Docente docente;
 
-    // Getters y setters
 }

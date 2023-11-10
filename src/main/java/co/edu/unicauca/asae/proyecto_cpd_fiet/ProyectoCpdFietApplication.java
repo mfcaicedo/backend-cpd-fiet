@@ -15,21 +15,18 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Tipo;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.DocentesRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.PublicacionesRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.TiposRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
+@Transactional
 public class ProyectoCpdFietApplication implements CommandLineRunner {
 
 	@Autowired
 	private DocentesRepository servicioBDDocentes;
-
 	@Autowired
 	private PublicacionesRepository servicioBDPublicaciones;
-
-	
 	@Autowired
 	private TiposRepository servicioBDTipos;
-
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoCpdFietApplication.class, args);
@@ -48,16 +45,17 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 		Docente objDocente2 = new Docente(2, "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
 				"2015", "Sistemas");
 		List<Docente> listaDocentes = new LinkedList();
-			Direccion objDireccion1 =  new Direccion();
+
+		Direccion objDireccion1 =  new Direccion();
 		objDireccion1.setCiudad("Popayan");
 		objDireccion1.setDireccionResidencia("Calle 26 EN #4-50");
 		objDireccion1.setPais("Colombia");
 		objDireccion1.setDocente(objDocente1);
 		objDocente1.setDireccion(objDireccion1);
-		listaDocentes.add(objDocente1);
-		listaDocentes.add(objDocente2);
-		this.servicioBDDocentes.saveAll(listaDocentes);
-		//this.servicioBDDocentes.save(objDocente1);
+		//listaDocentes.add(objDocente1);
+		//listaDocentes.add(objDocente2);
+		//this.servicioBDDocentes.saveAll(listaDocentes);
+		this.servicioBDDocentes.save(objDocente1);
 	}
 
 	
