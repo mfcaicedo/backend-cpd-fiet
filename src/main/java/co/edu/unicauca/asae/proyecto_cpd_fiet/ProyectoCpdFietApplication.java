@@ -8,13 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Direccion;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Docente;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Publicacion;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.models.Tipo;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.DocentesRepository;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.PublicacionesRepository;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.repositories.TiposRepository;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Direccion;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Docente;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Publicacion;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Tipo;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.DocentesRepository;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.PublicacionesRepository;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.TiposRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication

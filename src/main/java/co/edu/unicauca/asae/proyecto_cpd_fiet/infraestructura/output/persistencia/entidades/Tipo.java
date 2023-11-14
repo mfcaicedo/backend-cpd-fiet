@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,8 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.models;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
