@@ -11,12 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ManagementDocenteGatewayImplAdapter implements ManagementDocenteGatewayIntPort {
 
-    @Qualifier("docenteServiceModelMapper")
     private final ModelMapper docenteModelMapper;
     private final DocenteRepository docenteRepository;
 
     public ManagementDocenteGatewayImplAdapter(DocenteRepository docenteRepository,
-                                               ModelMapper docenteModelMapper) {
+                                              @Qualifier("docenteModelMapper") ModelMapper docenteModelMapper) {
         this.docenteRepository = docenteRepository;
         this.docenteModelMapper = docenteModelMapper;
     }
