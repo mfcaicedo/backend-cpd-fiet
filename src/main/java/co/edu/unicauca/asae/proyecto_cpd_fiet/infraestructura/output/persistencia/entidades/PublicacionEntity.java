@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Publicacion {
+public class PublicacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPublicacion;
@@ -24,9 +24,9 @@ public class Publicacion {
     private String area;
     @ManyToOne
     @JoinColumn(name="idTipo", nullable=false)
-    private Tipo tipo;
+    private TipoEntity tipoEntity;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "docentePublicacion", joinColumns = @JoinColumn(name = "idPublicacion"), inverseJoinColumns = @JoinColumn(name = "idPersona"))
-    private List<Docente> docentePublicacion;
+    @JoinTable(name = "docenteEntityPublicacion", joinColumns = @JoinColumn(name = "idPublicacion"), inverseJoinColumns = @JoinColumn(name = "idPersona"))
+    private List<DocenteEntity> docenteEntityPublicacion;
 
 }

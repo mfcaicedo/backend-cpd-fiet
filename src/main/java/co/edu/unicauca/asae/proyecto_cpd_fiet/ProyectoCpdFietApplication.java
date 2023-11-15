@@ -3,16 +3,16 @@ package co.edu.unicauca.asae.proyecto_cpd_fiet;
 import java.util.LinkedList;
 import java.util.List;
 
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DocenteEntity;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PublicacionEntity;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.TipoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Direccion;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Docente;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Publicacion;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Tipo;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.DocentesRepository;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.DocenteRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.PublicacionesRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.TiposRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProyectoCpdFietApplication implements CommandLineRunner {
 
 	@Autowired
-	private DocentesRepository servicioBDDocentes;
+	private DocenteRepository servicioBDDocentes;
 	@Autowired
 	private PublicacionesRepository servicioBDPublicaciones;
 	@Autowired
@@ -40,85 +40,75 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 	}
 
 	private void guardarDocentes() {
-		Docente objDocente1 = new Docente( "Cedula", "1002971825", "Piter", "Alveiro", "asdasd@unicauca.edu.co",
+
+		DocenteEntity objDocente1Entity = new DocenteEntity( "Cedula", "1002971825", "Piter", "Alveiro", "asdasd@unicauca.edu.co",
 				"2017", "Telematica");
-		Docente objDocente2 = new Docente( "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
+		DocenteEntity objDocente2Entity = new DocenteEntity( "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
 				"2015", "Sistemas");
 
-
-		Docente objDocente3 = new Docente( "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
+		DocenteEntity objDocente3Entity = new DocenteEntity( "Cedula", "1002972323", "Carlos", "Marin", "fabianxd@unicauca.edu.co",
 				"2015", "Sistemas");
 
+		List<DocenteEntity> listaDocenteEntities = new LinkedList();
+		listaDocenteEntities.add(objDocente1Entity);
+		listaDocenteEntities.add(objDocente2Entity);
+		listaDocenteEntities.add(objDocente3Entity);
 
-		List<Docente> listaDocentes = new LinkedList();
-		listaDocentes.add(objDocente1);
-		listaDocentes.add(objDocente2);
-		listaDocentes.add(objDocente3);
+		DireccionEntity objDireccion1Entity =  new DireccionEntity();
+		objDireccion1Entity.setCiudad("Popayan");
+		objDireccion1Entity.setDireccionResidencia("Calle 26 EN #4-50");
+		objDireccion1Entity.setPais("Colombia");
 
-		Direccion objDireccion1 =  new Direccion();
-		objDireccion1.setCiudad("Popayan");
-		objDireccion1.setDireccionResidencia("Calle 26 EN #4-50");
-		objDireccion1.setPais("Colombia");
+		objDireccion1Entity.setDocenteEntity(objDocente1Entity);
+		objDocente1Entity.setDireccionEntity(objDireccion1Entity);
 
+		DireccionEntity objDireccion2Entity =  new DireccionEntity();
+		objDireccion2Entity.setCiudad("Popayan");
+		objDireccion2Entity.setDireccionResidencia("Calle 890i387 EN #4-50");
+		objDireccion2Entity.setPais("Colombia");
 
+		objDireccion2Entity.setDocenteEntity(objDocente2Entity);
+		objDocente2Entity.setDireccionEntity(objDireccion2Entity);
 
-		objDireccion1.setDocente(objDocente1);
-		objDocente1.setDireccion(objDireccion1);
+		DireccionEntity objDireccion3Entity =  new DireccionEntity();
+		objDireccion3Entity.setCiudad("Popayan");
+		objDireccion3Entity.setDireccionResidencia("Calle 0000 EN #4-50");
+		objDireccion3Entity.setPais("Colombia");
 
-		//this.servicioBDDocentes.save(objDocente1);
+		objDireccion3Entity.setDocenteEntity(objDocente3Entity);
+		objDocente3Entity.setDireccionEntity(objDireccion3Entity);
 
+		this.servicioBDDocentes.saveAll(listaDocenteEntities);
 
-		Direccion objDireccion2 =  new Direccion();
-		objDireccion2.setCiudad("Popayan");
-		objDireccion2.setDireccionResidencia("Calle 890i387 EN #4-50");
-		objDireccion2.setPais("Colombia");
-
-		objDireccion2.setDocente(objDocente2);
-		objDocente2.setDireccion(objDireccion2);
-
-
-		Direccion objDireccion3 =  new Direccion();
-		objDireccion3.setCiudad("Popayan");
-		objDireccion3.setDireccionResidencia("Calle 0000 EN #4-50");
-		objDireccion3.setPais("Colombia");
-
-		objDireccion3.setDocente(objDocente3);
-		objDocente3.setDireccion(objDireccion3);
-
-
-
-		this.servicioBDDocentes.saveAll(listaDocentes);
-
-		//this.servicioBDDocentes.save(objDocente2);
 	}
 
 	
 	private void registrarPublicacion() {
-		Tipo tipo = new Tipo();
-		tipo.setNombre("Arte");
-		tipo = servicioBDTipos.save(tipo);
-		Publicacion objPublicacion1 = new Publicacion(1, "El arte de la guerra", "Historia", tipo, retornoDocente());
-		Publicacion objPublicacion2 = new Publicacion(2, "Game of thrones", "Fantasia", tipo, retornoDocente());
-		List<Publicacion> listaPublicaciones = new LinkedList();
-		listaPublicaciones.add(objPublicacion1);
-		listaPublicaciones.add(objPublicacion2);
+		TipoEntity tipoEntity = new TipoEntity();
+		tipoEntity.setNombre("Arte");
+		tipoEntity = servicioBDTipos.save(tipoEntity);
+		PublicacionEntity objPublicacion1Entity = new PublicacionEntity(1, "El arte de la guerra", "Historia", tipoEntity, retornoDocente());
+		PublicacionEntity objPublicacion2Entity = new PublicacionEntity(2, "Game of thrones", "Fantasia", tipoEntity, retornoDocente());
+		List<PublicacionEntity> listaPublicaciones = new LinkedList();
+		listaPublicaciones.add(objPublicacion1Entity);
+		listaPublicaciones.add(objPublicacion2Entity);
 		this.servicioBDPublicaciones.saveAll(listaPublicaciones);
 	}
 
-	private List<Docente> retornoDocente(){
+	private List<DocenteEntity> retornoDocente(){
 		return this.servicioBDDocentes.findAll();
 	}
 
 	private void consultarPublicaciones() {
-		Iterable<Publicacion> listaPublicaciones = this.servicioBDPublicaciones.findAll();
-		for (Publicacion publicacion : listaPublicaciones) {
+		Iterable<PublicacionEntity> listaPublicaciones = this.servicioBDPublicaciones.findAll();
+		for (PublicacionEntity publicacionEntity : listaPublicaciones) {
 			System.out.println("----");
-			System.out.println("Id publicación: " + publicacion.getIdPublicacion());
-			System.out.println("Area: " + publicacion.getArea());
-			System.out.println("Titulo: " + publicacion.getTitulo());
-			System.out.println("Tipo: " + publicacion.getTipo().getNombre());
+			System.out.println("Id publicación: " + publicacionEntity.getIdPublicacion());
+			System.out.println("Area: " + publicacionEntity.getArea());
+			System.out.println("Titulo: " + publicacionEntity.getTitulo());
+			System.out.println("TipoEntity: " + publicacionEntity.getTipoEntity().getNombre());
 			System.out.print("Docentes: ");
-			publicacion.getDocentePublicacion().forEach(docente -> System.out.println(docente.getNombres()));
+			publicacionEntity.getDocenteEntityPublicacion().forEach(docente -> System.out.println(docente.getNombres()));
 			System.out.println("------ \n\n");
 		}
 	}

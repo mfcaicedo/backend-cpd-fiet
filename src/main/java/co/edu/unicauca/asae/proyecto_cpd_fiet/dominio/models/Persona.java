@@ -1,31 +1,18 @@
-package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades;
+package co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "persona")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Persona {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPersona;
-    @Column
     private String tipoIdentificacion;
-    @Column
     private String numeroIdentificacion;
-    @Column
     private String nombres;
-    @Column
     private String apellidos;
 
     public Persona(String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos) {
@@ -34,4 +21,5 @@ public class Persona {
         this.nombres = nombres;
         this.apellidos = apellidos;
     }
+
 }

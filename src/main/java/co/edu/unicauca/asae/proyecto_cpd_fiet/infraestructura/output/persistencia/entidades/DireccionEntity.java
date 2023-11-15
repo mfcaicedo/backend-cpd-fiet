@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Direccion {
+public class DireccionEntity {
 
     @Id
     @Column(name = "idPersona")
@@ -28,6 +28,6 @@ public class Direccion {
     @MapsId
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY , optional = false)
     @JoinColumn(name="idPersona")
-    private Docente docente;
+    private DocenteEntity docenteEntity;
 
 }

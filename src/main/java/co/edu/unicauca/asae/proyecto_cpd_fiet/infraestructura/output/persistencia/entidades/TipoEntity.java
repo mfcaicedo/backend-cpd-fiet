@@ -15,13 +15,13 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tipo {
+public class TipoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTipo;
     @Column
     private String nombre;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tipo")
-    private List<Publicacion> publicacions;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tipoEntity")
+    private List<PublicacionEntity> publicacionEntities;
 
 }

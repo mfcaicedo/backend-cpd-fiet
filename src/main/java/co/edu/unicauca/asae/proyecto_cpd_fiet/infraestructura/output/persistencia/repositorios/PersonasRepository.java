@@ -2,8 +2,8 @@ package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistenc
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.Persona;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PersonaEntity;
 
-public interface PersonasRepository extends JpaRepository <Persona, Integer> {
+public interface PersonasRepository extends JpaRepository <PersonaEntity, Integer> {
     
 }
