@@ -5,11 +5,15 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.ManagementDocent
 import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.ManagementPublicacionGatewayIntPort;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.PublicacionFormatterResultsIntPort;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Docente;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Publicacion;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.usecases.ManagementDocenteCUAdapter;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.usecases.ManagementPublicacionCUAdapter;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTOReponse.DocenteDTOResponse;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTORequest.DocenteDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.mappers.DocenteMapperInfrastructureDomain;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTORequest.PublicacionDTORequest;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.mappers.PublicacionMapperInfrastructureDomain;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +56,25 @@ public class BeanConfiguration {
     @Qualifier("publicacionModelMapper")
     public ModelMapper publicacionModelMapper(){ return new ModelMapper(); }
 
+    @Bean
+    public PublicacionMapperInfrastructureDomain publicacionMapperInfrastructureDomain(){
+        return new PublicacionMapperInfrastructureDomain() {
+            @Override
+            public Publicacion mapperRequestToPublicacion(PublicacionDTORequest request) {
+                return null;
+            }
+
+            @Override
+            public PublicacionDTOResponse mapperPublicacionToResponse(Publicacion publicacion) {
+                return null;
+            }
+
+            @Override
+            public List<PublicacionDTOResponse> mapperPublicacionesToResponse(List<Publicacion> publicaciones) {
+                return null;
+            }
+        };
+    }
     @Bean
     public DocenteMapperInfrastructureDomain docenteMapperInfrastructureDomain() {
         return new DocenteMapperInfrastructureDomain() {
