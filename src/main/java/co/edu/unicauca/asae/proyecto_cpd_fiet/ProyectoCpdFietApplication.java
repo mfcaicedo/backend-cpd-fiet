@@ -15,31 +15,34 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistenci
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.DocenteRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.PublicacionesRepository;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.TiposRepository;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
-@Transactional
-public class ProyectoCpdFietApplication implements CommandLineRunner {
+//@ComponentScan(basePackages = "co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.mappers")
+public class ProyectoCpdFietApplication {
 
-	@Autowired
+	/*@Autowired
 	private DocenteRepository servicioBDDocentes;
 	@Autowired
 	private PublicacionesRepository servicioBDPublicaciones;
 	@Autowired
 	private TiposRepository servicioBDTipos;
-
+*/
 	public static void main(String[] args) {
+
 		SpringApplication.run(ProyectoCpdFietApplication.class, args);
 	}
 
-	@Override
+/*	@Override
 	public void run(String... args) throws Exception {
 		guardarDocentes();
 		registrarPublicacion();
 		consultarPublicaciones();
-	}
+	}*/
 
-	private void guardarDocentes() {
+	/*private void guardarDocentes() {
 
 		DocenteEntity objDocente1Entity = new DocenteEntity( "Cedula", "1002971825", "Piter", "Alveiro", "asdasd@unicauca.edu.co",
 				"2017", "Telematica");
@@ -80,10 +83,9 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 
 		this.servicioBDDocentes.saveAll(listaDocenteEntities);
 
-	}
+	}*/
 
-	
-	private void registrarPublicacion() {
+	/*private void registrarPublicacion() {
 		TipoEntity tipoEntity = new TipoEntity();
 		tipoEntity.setNombre("Arte");
 		tipoEntity = servicioBDTipos.save(tipoEntity);
@@ -93,13 +95,13 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 		listaPublicaciones.add(objPublicacion1Entity);
 		listaPublicaciones.add(objPublicacion2Entity);
 		this.servicioBDPublicaciones.saveAll(listaPublicaciones);
-	}
+	}*/
 
-	private List<DocenteEntity> retornoDocente(){
+	/*private List<DocenteEntity> retornoDocente(){
 		return this.servicioBDDocentes.findAll();
-	}
+	}*/
 
-	private void consultarPublicaciones() {
+	/*private void consultarPublicaciones() {
 		Iterable<PublicacionEntity> listaPublicaciones = this.servicioBDPublicaciones.findAll();
 		for (PublicacionEntity publicacionEntity : listaPublicaciones) {
 			System.out.println("----");
@@ -111,6 +113,6 @@ public class ProyectoCpdFietApplication implements CommandLineRunner {
 			publicacionEntity.getDocenteEntityPublicacion().forEach(docente -> System.out.println(docente.getNombres()));
 			System.out.println("------ \n\n");
 		}
-	}
+	}*/
 
 }

@@ -53,6 +53,12 @@ public class BeanConfiguration {
     }
 
     @Bean
+    @Qualifier("docenteModelMapperController")
+    public ModelMapper docenteModelMapperConotroller(){
+        return new ModelMapper();
+    }
+
+    @Bean
     @Qualifier("publicacionModelMapper")
     public ModelMapper publicacionModelMapper(){ return new ModelMapper(); }
 
@@ -80,7 +86,8 @@ public class BeanConfiguration {
         return new DocenteMapperInfrastructureDomain() {
             @Override
             public Docente mapperRequestToDocente(DocenteDTORequest request) {
-                return null;
+                Docente docente = new Docente();
+                return docente;
             }
             @Override
             public DocenteDTOResponse mapperDocenteToResponse(Docente docente) {
