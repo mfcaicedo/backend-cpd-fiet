@@ -29,7 +29,7 @@ public class DocenteEntity extends PersonaEntity {
     @Column
     private String departamento;
     @OneToOne(mappedBy = "docenteEntity", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    private DireccionEntity direccionEntity;
+    private DireccionEntity direccion;
     @JsonIgnore
     @ManyToMany(mappedBy = "docentes", fetch = FetchType.EAGER)
     private List<PublicacionEntity> publicaciones;

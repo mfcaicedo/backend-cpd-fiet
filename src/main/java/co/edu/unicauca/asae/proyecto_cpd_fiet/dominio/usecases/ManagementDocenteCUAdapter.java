@@ -5,6 +5,8 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.DocenteFormatter
 import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.ManagementDocenteGatewayIntPort;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Docente;
 
+import java.util.List;
+
 public class ManagementDocenteCUAdapter implements ManagementDocenteCUIntPort {
 
     private final ManagementDocenteGatewayIntPort managementDocenteGateway;
@@ -19,7 +21,6 @@ public class ManagementDocenteCUAdapter implements ManagementDocenteCUIntPort {
     @Override
     public Docente create(Docente docente) {
 
-        //validacion docente por correo
         Docente docenteCrear = null;
         if (this.managementDocenteGateway.validarDocentePorCorreo(docente.getCorreo())){
             this.docenteFormatterResultsIntPort
@@ -29,6 +30,11 @@ public class ManagementDocenteCUAdapter implements ManagementDocenteCUIntPort {
         }
 
         return docenteCrear;
+    }
+
+    @Override
+    public List<Docente> findAll() {
+        return this.managementDocenteGateway.findAll();
     }
 
 }

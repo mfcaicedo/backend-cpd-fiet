@@ -21,7 +21,7 @@ public interface PublicacionesRepository extends JpaRepository<PublicacionEntity
      */
 
 
-    List<PublicacionEntity> findByTituloIgnoreCaseContainingOrderByIdPublicacionDesc(String patron);
+    List<PublicacionEntity> findByTituloIgnoreCaseContainingOrderByIdPublicacion(String patron);
 
 
     /**

@@ -3,13 +3,16 @@ package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerG
 import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.input.ManagementDocenteCUIntPort;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Direccion;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Docente;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Publicacion;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTOReponse.DocenteDTOResponse;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTORequest.DireccionDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTORequest.DocenteDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.mappers.DocenteMapperInfrastructureDomain;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DocenteEntity;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -22,8 +25,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+//@Validated
 public class DocenteRestController {
-
     private final ManagementDocenteCUIntPort managementDocenteCUIntPort;
    // private final DocenteMapperInfrastructureDomain mapeadorDocente;
     private final ModelMapper modelMapper;
@@ -50,20 +53,19 @@ public class DocenteRestController {
 
     @GetMapping("/docentes")
     public ResponseEntity<List<DocenteDTOResponse>> findAll() {
-        System.out.println("si lllega al get ");
-        DocenteDTOResponse docente = new DocenteDTOResponse();
-        docente.setNombres("Juan");
-        docente.setApellidos("Perez");
-        List<DocenteDTOResponse> docentes = List.of(docente);
+        System.out.println("llega al get Docentes ");
 
-        return new ResponseEntity<List<DocenteDTOResponse>>(
-            docentes,
-            HttpStatus.OK
-        );
-        /*ResponseEntity<List<DocenteDTOResponse>> objRespuesta = new ResponseEntity<List<DocenteDTOResponse>>(
-                mapeadorDocente.mapperDocentesToResponse(this.managementDocenteCUIntPort.findAll()),
-                HttpStatus.OK);
-        return objRespuesta;*/
+        Iterable<Docente> docentes = this.managementDocenteCUIntPort.findAll();
+        List<DocenteDTOResponse> listDocentes = this.modelMapper.map(docentes,
+                new TypeToken<List<DocenteDTOResponse>>() {
+                }.getType());
+
+        ResponseEntity<List<DocenteDTOResponse>> response = new ResponseEntity<List<DocenteDTOResponse>>
+                (listDocentes,
+                        HttpStatus.OK
+                );
+        return response;
+
     }
 
 }

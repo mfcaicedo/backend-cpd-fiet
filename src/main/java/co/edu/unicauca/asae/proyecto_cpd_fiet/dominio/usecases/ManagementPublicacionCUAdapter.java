@@ -30,7 +30,7 @@ public class ManagementPublicacionCUAdapter implements ManagementPublicacionCUIn
 
     @Override
     public Publicacion create(Publicacion publicacion) {
-        // validar que existan los autores de la publicacion
+
         List<Docente> autores = publicacion.getDocentes();
 
         for ( Docente docente : autores ){
@@ -40,7 +40,6 @@ public class ManagementPublicacionCUAdapter implements ManagementPublicacionCUIn
             }
         }
 
-        // validar que no exista una publicacion con ese titulo
         if(this.managementPublicacionGateway.validarPublicacionByTitulo(publicacion.getTitulo())){
             EntidadYaExisteException objException = new EntidadYaExisteException("La publicación con titulo " + publicacion.getTitulo() + " ya existe");
             throw  objException;
@@ -57,18 +56,16 @@ public class ManagementPublicacionCUAdapter implements ManagementPublicacionCUIn
 
     @Override
     public List<PublicacionDTOResponse> consultarPublicacionPorPatron(String titulo){
-        //consulta publicacion por el patron
         return this.managementPublicacionGateway.consultarPublicacionPorPatron(titulo);
     }
 
     @Override
     public Publicacion consultarPublicacionPorTitulo(String titulo){
-        //existe ña publciacion por titulo ?
+
         if(this.managementPublicacionGateway.validarPublicacionByTitulo(titulo)){
             return this.managementPublicacionGateway.consultarPublicacionPorTitulo(titulo);
         }
 
-        //no existe
         EntidadNoExisteException objException = new EntidadNoExisteException("No existe publicacion con el titulo" + titulo );
         throw  objException;
 

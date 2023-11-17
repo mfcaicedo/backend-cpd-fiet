@@ -10,6 +10,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -64,9 +65,9 @@ public class ManagementPublicacionGatewayImplAdapter implements ManagementPublic
 
     @Override
     public List<PublicacionDTOResponse> consultarPublicacionPorPatron(String titulo) {
-        this.publicacionesRepository.findByTituloIgnoreCaseContainingOrderByIdPublicacionDesc(titulo);
+        System.out.println("patron " + titulo);
 
-        Iterable<PublicacionEntity> publicaciones = this.publicacionesRepository.findAll();
+        Iterable<PublicacionEntity> publicaciones = this.publicacionesRepository.findByTituloIgnoreCaseContainingOrderByIdPublicacion(titulo);;
         List<PublicacionDTOResponse> listPublicaciones = this.modelMapper.map(publicaciones, new TypeToken<List<PublicacionDTOResponse>>() {
         }.getType());
         return listPublicaciones;

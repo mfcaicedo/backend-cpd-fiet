@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Validated
 @RestController
 @RequestMapping("/api")
 public class PublicacionRestcontroller {
@@ -45,7 +44,7 @@ public class PublicacionRestcontroller {
     }
 
     @PostMapping("/publicaciones")
-    public ResponseEntity<PublicacionDTOResponse> create(@Valid  @RequestBody PublicacionDTORequest publicacion) {
+    public ResponseEntity<PublicacionDTOResponse> create(@RequestBody PublicacionDTORequest publicacion) {
 
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
         Publicacion publicacionCreate = modelMapper.map(publicacion, Publicacion.class);
@@ -61,7 +60,6 @@ public class PublicacionRestcontroller {
     public ResponseEntity<List<PublicacionDTOResponse>> findAll() {
 
         Iterable<Publicacion> publicaciones = this.managementPublicacionCUIntPort.findAll();
-
         List<PublicacionDTOResponse> listPublicaciones = this.modelMapper.map(publicaciones,
                 new TypeToken<List<PublicacionDTOResponse>>() {
         }.getType());

@@ -22,7 +22,7 @@ public class DocenteDTOResponse {
     private String correo;
     private String vinculacion;
     private String departamento;
-    private DireccionDTOResponse direccionDTOResponse;
+    private DireccionDTOResponse direccion;
     @JsonIgnore
     private List<PublicacionDTOResponse> publicaciones;
 
