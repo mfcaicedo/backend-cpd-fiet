@@ -1,22 +1,22 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models;
 
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PublicacionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Docente extends Persona {
     private String correo;
     private String vinculacion;
     private String departamento;
-    private DireccionEntity direccionEntity;
-    private List<PublicacionEntity> publicaciones;
+    private Direccion direccion;
+    private List<Publicacion> publicaciones;
 
     public Docente( String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion, String departamento) {
         super( tipoIdentificacion, numeroIdentificacion, nombres, apellidos);

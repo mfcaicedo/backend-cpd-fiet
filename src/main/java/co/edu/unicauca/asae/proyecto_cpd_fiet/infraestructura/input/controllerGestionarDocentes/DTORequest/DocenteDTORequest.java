@@ -20,9 +20,7 @@ public class DocenteDTORequest {
 
     @NotNull(message="{docente.id.}")
     private Integer idPersona;
-    
     private String tipoIdentificacion;
-    
     @Size(min=5, max = 11, message="{}")
     private String numeroIdentificacion;
     private String nombres;
@@ -31,7 +29,7 @@ public class DocenteDTORequest {
     private String correo;
     private String vinculacion;
     private String departamento;
-    private DireccionEntity direccionEntity;
+    private DireccionDTORequest direccionDTORequest;
     private List<PublicacionEntity> publicaciones;
 
 }

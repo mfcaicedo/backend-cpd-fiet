@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistenc
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name = "docente")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class DocenteEntity extends PersonaEntity {
     public DocenteEntity(String tipoIdentificacion, String numeroIdentificacion, String nombres, String apellidos, String correo, String vinculacion, String departamento) {
@@ -25,7 +27,7 @@ public class DocenteEntity extends PersonaEntity {
     private String vinculacion;
     @Column
     private String departamento;
-    @OneToOne(mappedBy = "docenteEntity", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "docenteEntity", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private DireccionEntity direccionEntity;
     @ManyToMany(mappedBy = "docenteEntityPublicacion", fetch = FetchType.LAZY)
     private List<PublicacionEntity> publicaciones;

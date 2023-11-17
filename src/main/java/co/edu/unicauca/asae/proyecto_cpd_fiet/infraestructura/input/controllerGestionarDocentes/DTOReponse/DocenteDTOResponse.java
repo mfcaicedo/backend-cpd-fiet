@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTOReponse;
 
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PublicacionEntity;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class DocenteDTOResponse {
     private String correo;
     private String vinculacion;
     private String departamento;
-    private DireccionEntity direccionEntity;
-    private List<PublicacionEntity> publicaciones;
+    private DireccionDTOResponse direccionDTOResponse;
+    private List<PublicacionDTOResponse> publicaciones;
 
 }

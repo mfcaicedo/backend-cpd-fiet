@@ -1,8 +1,10 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.controllers;
 
 import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.input.ManagementDocenteCUIntPort;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Direccion;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Docente;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTOReponse.DocenteDTOResponse;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTORequest.DireccionDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTORequest.DocenteDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.mappers.DocenteMapperInfrastructureDomain;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
@@ -23,6 +25,8 @@ public class DocenteRestController {
     private final ManagementDocenteCUIntPort managementDocenteCUIntPort;
    // private final DocenteMapperInfrastructureDomain mapeadorDocente;
     private final ModelMapper modelMapper;
+    // private final DocenteMapperInfrastructureDomain mapperRequestDocente;
+
     @Autowired
     public DocenteRestController(ManagementDocenteCUIntPort managementDocenteCUIntPort,
                                 @Qualifier("docenteModelMapperController") ModelMapper modelMapper) {
@@ -33,8 +37,22 @@ public class DocenteRestController {
     @PostMapping("/docentes")
     public ResponseEntity<DocenteDTOResponse> create(@RequestBody DocenteDTORequest docente) {
 
+
+       /* DireccionEntity direccionEntity = modelMapper.map(docente.getDireccionDTORequest(),DireccionEntity.class);
+        DocenteEntity docenteEntity = modelMapper.map(docente, DocenteEntity.class);
+
+        direccionEntity.setDocenteEntity(docenteEntity);
+        docenteEntity.setDireccionEntity(direccionEntity);*/
+
+
+        //Docente docenteCreate1 = modelMapper.map(docenteEntity, Docente.class);
+
         Docente docenteCreate = modelMapper.map(docente, Docente.class);
-        Docente docenteAux = managementDocenteCUIntPort.create(docenteCreate);
+
+
+//        Docente docenteAux = managementDocenteCUIntPort.create(docenteCreate1);
+        Docente docenteAux = managementDocenteCUIntPort.create(modelMapper.map(docenteCreate, Docente.class));
+
         ResponseEntity<DocenteDTOResponse> response = new ResponseEntity<DocenteDTOResponse>(
                 modelMapper.map(docenteAux, DocenteDTOResponse.class),
                 HttpStatus.CREATED);
