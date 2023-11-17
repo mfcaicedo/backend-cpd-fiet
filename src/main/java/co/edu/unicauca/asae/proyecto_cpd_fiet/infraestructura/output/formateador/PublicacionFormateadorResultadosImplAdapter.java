@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PublicacionFormateadorResultadosImplAdapter implements PublicacionFormatterResultsIntPort {
-
-    //@Override
-   /* public void retornarRespuestaErrorEntidadExiste(String mensaje) {
+    @Override
+   public void retornarRespuestaErrorEntidadExiste(String mensaje) {
         EntidadYaExisteException objException = new EntidadYaExisteException(mensaje);
         throw objException;
     }
@@ -19,5 +18,5 @@ public class PublicacionFormateadorResultadosImplAdapter implements PublicacionF
     public void retornarRespuestaErrorReglaDeNegocio(String mensaje) {
         ReglaNegocioExcepcion objException = new ReglaNegocioExcepcion(mensaje);
         throw objException;
-    }*/
+    }
 }

@@ -15,11 +15,14 @@ public interface PublicacionesRepository extends JpaRepository<PublicacionEntity
 
     /**
      *  obtener las publicaciones por un patrón del título, ignorando
-     * mayúsculas y minúsculas y ordenándolas por el id de mayor a menor IgnoreCaseContainingOrderByPublicacionesIdPublicacionDesc
+     * mayúsculas y minúsculas y ordenándolas por el id de mayor a menor
      * @param patron patron del titulo
      * @return Las publicaciones que cumplan con el patrón ; Empty
      */
-    List<PublicacionEntity> findByTituloIgnoreCaseContaining(String patron);
+
+
+    List<PublicacionEntity> findByTituloIgnoreCaseContainingOrderByIdPublicacionDesc(String patron);
+
 
     /**
      * Utilizar una query para ver si existe una publicación con un titulo
@@ -28,4 +31,7 @@ public interface PublicacionesRepository extends JpaRepository<PublicacionEntity
      */
     @Query("SELECT COUNT(p) > 0 FROM PublicacionEntity p WHERE LOWER(p.titulo) = LOWER(:titulo)")
     boolean existsByTitulo(@Param("titulo") String titulo);
+
+    @Query("SELECT COUNT(p) > 0 FROM PublicacionEntity p WHERE p.idPublicacion = :id")
+    boolean existsById(@Param("id") String id);
 }

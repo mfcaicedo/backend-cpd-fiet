@@ -18,7 +18,17 @@ public class ManagementDocenteCUAdapter implements ManagementDocenteCUIntPort {
 
     @Override
     public Docente create(Docente docente) {
-        return this.managementDocenteGateway.create(docente);
+
+        //validacion docente por correo
+        Docente docenteCrear = null;
+        if (this.managementDocenteGateway.validarDocentePorCorreo(docente.getCorreo())){
+            this.docenteFormatterResultsIntPort
+                    .retornarRespuestaErrorCorreoExiste("Error, el correo ya existe");
+        }else{
+            docenteCrear = this.managementDocenteGateway.create(docente);
+        }
+
+        return docenteCrear;
     }
 
 }

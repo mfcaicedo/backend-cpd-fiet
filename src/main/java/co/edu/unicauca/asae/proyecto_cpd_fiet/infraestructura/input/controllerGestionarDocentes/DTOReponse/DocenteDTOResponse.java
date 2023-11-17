@@ -3,13 +3,11 @@ package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerG
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PublicacionEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import java.util.List;
-
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,6 +23,7 @@ public class DocenteDTOResponse {
     private String vinculacion;
     private String departamento;
     private DireccionDTOResponse direccionDTOResponse;
+    @JsonIgnore
     private List<PublicacionDTOResponse> publicaciones;
 
 }

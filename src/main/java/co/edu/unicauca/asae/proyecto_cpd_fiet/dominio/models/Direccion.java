@@ -14,6 +14,6 @@ public class Direccion {
     private String direccionResidencia;
     private String ciudad;
     private String pais;
-    private DocenteEntity docenteEntity;
+    private Docente docente;
 
 }

@@ -1,11 +1,10 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.DTORequest;
 
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTORequest.PublicacionDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PublicacionEntity;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,19 +16,32 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class DocenteDTORequest {
-
-    @NotNull(message="{docente.id.}")
     private Integer idPersona;
+
     private String tipoIdentificacion;
-    @Size(min=5, max = 11, message="{}")
+
+    @Size(min=5, max = 11, message="{docente.longitud.numeroidenticacion}")
     private String numeroIdentificacion;
+
+    @NotNull(message = "{docente.nombres.notnull}")
     private String nombres;
+
+    @NotNull(message = "{docente.apellido.notnull}")
     private String apellidos;
-    @Email(message="{}")
+
+    @NotBlank(message = "El correo no puede estar vacio")
+    @NotEmpty(message = "{docente.correo.empty}")
+    @Email(message="{docente.correo.email}")
     private String correo;
+
     private String vinculacion;
+
+    @NotEmpty(message = "{docente.departamento.empty}")
     private String departamento;
+
+    @NotEmpty(message = "{docente.direccion.empty}")
     private DireccionDTORequest direccionDTORequest;
-    private List<PublicacionEntity> publicaciones;
+
+    private List<PublicacionDTORequest> publicaciones;
 
 }

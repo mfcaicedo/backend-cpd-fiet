@@ -25,8 +25,8 @@ public class ManagementDocenteGatewayImplAdapter implements ManagementDocenteGat
     }
 
     @Override
-    public boolean validProducctoByCodigo(String codigo) {
-        return false;
+    public boolean validarDocentePorCorreo(String correo) {
+        return this.docenteRepository.existsByCorreo(correo);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class ManagementDocenteGatewayImplAdapter implements ManagementDocenteGat
 
         Docente objDocenteResponse = this.docenteModelMapper.map(objDocenteRegistrado, Docente.class);
         return objDocenteResponse;
+    }
+
+    @Override
+    public Docente consultarDocentePorCorreo(String correo) {
+        return null;
     }
 }

@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,22 +39,8 @@ public class DocenteRestController {
     @PostMapping("/docentes")
     public ResponseEntity<DocenteDTOResponse> create(@RequestBody DocenteDTORequest docente) {
 
-
-       /* DireccionEntity direccionEntity = modelMapper.map(docente.getDireccionDTORequest(),DireccionEntity.class);
-        DocenteEntity docenteEntity = modelMapper.map(docente, DocenteEntity.class);
-
-        direccionEntity.setDocenteEntity(docenteEntity);
-        docenteEntity.setDireccionEntity(direccionEntity);*/
-
-
-        //Docente docenteCreate1 = modelMapper.map(docenteEntity, Docente.class);
-
         Docente docenteCreate = modelMapper.map(docente, Docente.class);
-
-
-//        Docente docenteAux = managementDocenteCUIntPort.create(docenteCreate1);
         Docente docenteAux = managementDocenteCUIntPort.create(modelMapper.map(docenteCreate, Docente.class));
-
         ResponseEntity<DocenteDTOResponse> response = new ResponseEntity<DocenteDTOResponse>(
                 modelMapper.map(docenteAux, DocenteDTOResponse.class),
                 HttpStatus.CREATED);

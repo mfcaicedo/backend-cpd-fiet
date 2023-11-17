@@ -12,5 +12,5 @@ import java.util.List;
 public class Tipo {
     private Integer idTipo;
     private String nombre;
-    private List<PublicacionEntity> publicacionEntities;
+    private List<Publicacion> publicacion;
 }

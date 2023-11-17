@@ -16,10 +16,15 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGe
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.mappers.PublicacionMapperInfrastructureDomain;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 @Configuration
 public class BeanConfiguration {
@@ -39,9 +44,13 @@ public class BeanConfiguration {
     @Bean
     public ManagementPublicacionCUAdapter createManagementPublicacionCUInt(
             ManagementPublicacionGatewayIntPort managementPublicacionGatewayIntPort,
-            PublicacionFormatterResultsIntPort publicacionFormatterResultsIntPort) {
+            PublicacionFormatterResultsIntPort publicacionFormatterResultsIntPort,
+            ManagementDocenteGatewayIntPort managementDocenteGatewayIntPort
+    ) {
         ManagementPublicacionCUAdapter managementPublicacionCUAdapter = new ManagementPublicacionCUAdapter(
-                managementPublicacionGatewayIntPort, publicacionFormatterResultsIntPort);
+                managementPublicacionGatewayIntPort, publicacionFormatterResultsIntPort,
+                managementDocenteGatewayIntPort
+                );
         return managementPublicacionCUAdapter;
     }
 
@@ -98,5 +107,21 @@ public class BeanConfiguration {
                 return null;
             }
         };
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+
+        SessionLocaleResolver localResolver = new SessionLocaleResolver();
+        localResolver.setDefaultLocale(Locale.US);
+        return localResolver;
+    }
+
+    @Bean(name = "messageResourceSB")
+    public MessageSource messageResource() {
+        ResourceBundleMessageSource messageBundleResrc = new ResourceBundleMessageSource();
+        messageBundleResrc.setBasename("classpath:ValidationMessages");
+        messageBundleResrc.setDefaultEncoding("UTF-8");
+        return messageBundleResrc;
     }
 }

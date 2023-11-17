@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,8 @@ public class TipoEntity {
     private Integer idTipo;
     @Column
     private String nombre;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tipoEntity")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tipo")
     private List<PublicacionEntity> publicacionEntities;
 
 }

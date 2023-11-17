@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class DocenteEntity extends PersonaEntity {
     private String departamento;
     @OneToOne(mappedBy = "docenteEntity", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private DireccionEntity direccionEntity;
-    @ManyToMany(mappedBy = "docenteEntityPublicacion", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToMany(mappedBy = "docentes", fetch = FetchType.EAGER)
     private List<PublicacionEntity> publicaciones;
 }

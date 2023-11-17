@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,14 @@ public class PublicacionEntity {
     private String titulo;
     @Column
     private String area;
-    @ManyToOne
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="idTipo", nullable=false)
-    private TipoEntity tipoEntity;
+    private TipoEntity tipo;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "docenteEntityPublicacion", joinColumns = @JoinColumn(name = "idPublicacion"), inverseJoinColumns = @JoinColumn(name = "idPersona"))
-    private List<DocenteEntity> docenteEntityPublicacion;
+    private List<DocenteEntity> docentes;
 
 }

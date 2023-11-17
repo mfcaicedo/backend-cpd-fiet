@@ -23,7 +23,7 @@ import java.util.Map;
 @ControllerAdvice
 public class RestApiExceptionHandler {
 
-  /*  @ExceptionHandler(Exception.class)
+   @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                                                         final Exception ex, final Locale locale) {
         final Error error = ErrorUtils
@@ -87,5 +87,5 @@ public class RestApiExceptionHandler {
     ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
         return new ResponseEntity<>(e.getMessage(),
                 HttpStatus.BAD_REQUEST);
-    }*/
+    }
 }

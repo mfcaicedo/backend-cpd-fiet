@@ -1,31 +1,84 @@
 package co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.gateway;
 
-import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.ManagementDocenteGatewayIntPort;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.aplication.output.ManagementPublicacionGatewayIntPort;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.dominio.models.Publicacion;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.PublicacionEntity;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.repositorios.PublicacionesRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ManagementPublicacionGatewayImplAdapter implements ManagementPublicacionGatewayIntPort {
+
+    private final PublicacionesRepository publicacionesRepository;
+    private final ModelMapper modelMapper;
+
+    public ManagementPublicacionGatewayImplAdapter(
+            PublicacionesRepository publicacionesRepository,
+           @Qualifier("publicacionModelMapper")ModelMapper modelMapper
+    ) {
+        this.publicacionesRepository = publicacionesRepository;
+        this.modelMapper = modelMapper;
+    }
+
     @Override
-    public boolean validPublicacionById(String id) {
+    public boolean validarPublicacionById(String id) {
         return false;
     }
 
     @Override
-    public boolean validPublicacionByTitulo(String titulo) {
-        return false;
+    public boolean validarPublicacionByTitulo(String titulo) {
+
+        return this.publicacionesRepository.existsByTitulo(titulo);
     }
 
     @Override
     public Publicacion create(Publicacion publicacion) {
+
+
+        PublicacionEntity publicacionEntity = modelMapper.map(publicacion,PublicacionEntity.class);
+        return this.modelMapper.map(this.publicacionesRepository.save(publicacionEntity), Publicacion.class);
+
+    }
+
+    @Override
+    public Publicacion actualizar(Publicacion publicacion) {
+
         return null;
     }
 
     @Override
     public List<Publicacion> findAll() {
+
+        Iterable<PublicacionEntity> publicaciones = this.publicacionesRepository.findAll();
+        List<Publicacion> listPublicaciones = this.modelMapper.map(publicaciones, new TypeToken<List<Publicacion>>() {
+        }.getType());
+        return listPublicaciones;
+
+    }
+
+    @Override
+    public List<PublicacionDTOResponse> consultarPublicacionPorPatron(String titulo) {
+        this.publicacionesRepository.findByTituloIgnoreCaseContainingOrderByIdPublicacionDesc(titulo);
+
+        Iterable<PublicacionEntity> publicaciones = this.publicacionesRepository.findAll();
+        List<PublicacionDTOResponse> listPublicaciones = this.modelMapper.map(publicaciones, new TypeToken<List<PublicacionDTOResponse>>() {
+        }.getType());
+        return listPublicaciones;
+    }
+
+    @Override
+    public Publicacion consultarPublicacionPorTitulo(String titulo) {
+        return null;
+    }
+
+    @Override
+    public Publicacion asignarPublicacionDocente(String correo, String titulo) {
         return null;
     }
 }

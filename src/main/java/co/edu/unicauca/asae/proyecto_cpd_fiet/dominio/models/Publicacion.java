@@ -16,7 +16,7 @@ public class Publicacion {
     private Integer idPublicacion;
     private String titulo;
     private String area;
-    private TipoEntity tipoEntity;
-    private List<DocenteEntity> docenteEntityPublicacion;
+    private Tipo tipo;
+    private List<Docente> docentes;
 
 }
