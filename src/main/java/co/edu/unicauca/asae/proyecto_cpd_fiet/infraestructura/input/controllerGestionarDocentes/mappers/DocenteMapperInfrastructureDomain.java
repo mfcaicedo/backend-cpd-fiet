@@ -14,4 +14,7 @@ public interface DocenteMapperInfrastructureDomain {
     DocenteDTOResponse mapperDocenteToResponse(Docente docente);
     List<DocenteDTOResponse> mapperDocentesToResponse(List<Docente> docentes);
 
+    List<Docente> mapperDocentesRequestToDocente(List<DocenteDTORequest> docentes);
+
+
 }

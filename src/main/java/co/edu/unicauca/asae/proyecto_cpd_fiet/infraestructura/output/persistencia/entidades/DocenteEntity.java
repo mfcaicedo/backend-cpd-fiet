@@ -31,6 +31,6 @@ public class DocenteEntity extends PersonaEntity {
     @OneToOne(mappedBy = "docenteEntity", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private DireccionEntity direccion;
     @JsonIgnore
-    @ManyToMany(mappedBy = "docentes", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "docentes", fetch = FetchType.LAZY)
     private List<PublicacionEntity> publicaciones;
 }

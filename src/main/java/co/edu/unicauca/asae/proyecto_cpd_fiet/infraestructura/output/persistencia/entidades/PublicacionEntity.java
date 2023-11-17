@@ -25,11 +25,11 @@ public class PublicacionEntity {
     private String area;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="idTipo", nullable=false)
     private TipoEntity tipo;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "docenteEntityPublicacion", joinColumns = @JoinColumn(name = "idPublicacion"), inverseJoinColumns = @JoinColumn(name = "idPersona"))
     private List<DocenteEntity> docentes;
 

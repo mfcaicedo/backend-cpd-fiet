@@ -17,14 +17,14 @@ import java.util.List;
 public class ManagementPublicacionGatewayImplAdapter implements ManagementPublicacionGatewayIntPort {
 
     private final PublicacionesRepository publicacionesRepository;
-    private final ModelMapper modelMapper;
+    private final ModelMapper publicacionMapper;
 
     public ManagementPublicacionGatewayImplAdapter(
             PublicacionesRepository publicacionesRepository,
-           @Qualifier("publicacionModelMapper")ModelMapper modelMapper
+          ModelMapper publicacionMapper
     ) {
         this.publicacionesRepository = publicacionesRepository;
-        this.modelMapper = modelMapper;
+        this.publicacionMapper = publicacionMapper;
     }
 
     @Override
@@ -42,22 +42,22 @@ public class ManagementPublicacionGatewayImplAdapter implements ManagementPublic
     public Publicacion create(Publicacion publicacion) {
 
 
-        PublicacionEntity publicacionEntity = modelMapper.map(publicacion,PublicacionEntity.class);
-        return this.modelMapper.map(this.publicacionesRepository.save(publicacionEntity), Publicacion.class);
+        PublicacionEntity publicacionEntity = publicacionMapper.map(publicacion,PublicacionEntity.class);
+        return this.publicacionMapper.map(this.publicacionesRepository.save(publicacionEntity), Publicacion.class);
 
     }
 
     @Override
     public Publicacion actualizar(Publicacion publicacion) {
-
-        return null;
+        PublicacionEntity publicacionEntity = publicacionMapper.map(publicacion,PublicacionEntity.class);
+        return this.publicacionMapper.map(this.publicacionesRepository.save(publicacionEntity), Publicacion.class);
     }
 
     @Override
     public List<Publicacion> findAll() {
 
         Iterable<PublicacionEntity> publicaciones = this.publicacionesRepository.findAll();
-        List<Publicacion> listPublicaciones = this.modelMapper.map(publicaciones, new TypeToken<List<Publicacion>>() {
+        List<Publicacion> listPublicaciones = this.publicacionMapper.map(publicaciones, new TypeToken<List<Publicacion>>() {
         }.getType());
         return listPublicaciones;
 
@@ -68,14 +68,14 @@ public class ManagementPublicacionGatewayImplAdapter implements ManagementPublic
         System.out.println("patron " + titulo);
 
         Iterable<PublicacionEntity> publicaciones = this.publicacionesRepository.findByTituloIgnoreCaseContainingOrderByIdPublicacion(titulo);;
-        List<PublicacionDTOResponse> listPublicaciones = this.modelMapper.map(publicaciones, new TypeToken<List<PublicacionDTOResponse>>() {
+        List<PublicacionDTOResponse> listPublicaciones = this.publicacionMapper.map(publicaciones, new TypeToken<List<PublicacionDTOResponse>>() {
         }.getType());
         return listPublicaciones;
     }
 
     @Override
     public Publicacion consultarPublicacionPorTitulo(String titulo) {
-        return null;
+        return this.publicacionMapper.map(this.publicacionesRepository.findByTitulo(titulo), Publicacion.class);
     }
 
     @Override

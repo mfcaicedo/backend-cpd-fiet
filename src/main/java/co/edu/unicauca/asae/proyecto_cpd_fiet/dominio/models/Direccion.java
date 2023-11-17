@@ -16,4 +16,10 @@ public class Direccion {
     private String pais;
     private Docente docente;
 
+    public Direccion(Integer idPersona, String direccionResidencia, String ciudad, String pais) {
+        this.idPersona = idPersona;
+        this.direccionResidencia = direccionResidencia;
+        this.ciudad = ciudad;
+        this.pais = pais;
+    }
 }

@@ -5,9 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PublicacionMapper {
+public class Mapper {
     @Bean
-    public ModelMapper crearPublicacionMapper() {
-        return new ModelMapper();
+    public ModelMapper crearMapper() {
+        ModelMapper mapper = new ModelMapper();
+        return mapper;
     }
 }

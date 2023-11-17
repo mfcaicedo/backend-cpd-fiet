@@ -14,8 +14,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class DocenteDTORequest {
-    private Integer idPersona;
 
+    private Integer idPersona;
     private String tipoIdentificacion;
 
     @Size(min=5, max = 11, message="{docente.longitud.numeroidenticacion}")
@@ -27,7 +27,7 @@ public class DocenteDTORequest {
     @NotNull(message = "{docente.apellido.notnull}")
     private String apellidos;
 
-    @NotBlank(message = "El correo no puede estar vacio")
+    @NotBlank(message = "{docente.correo.notblank}")
     @NotEmpty(message = "{docente.correo.empty}")
     @Email(message="{docente.correo.email}")
     private String correo;
@@ -37,8 +37,8 @@ public class DocenteDTORequest {
     @NotEmpty(message = "{docente.departamento.empty}")
     private String departamento;
 
-    @NotEmpty(message = "{docente.direccion.empty}")
-    private DireccionDTORequest direccionDTORequest;
+    @NotNull(message = "{docente.direccion.notnull}")
+    private DireccionDTORequest direccion;
 
     private List<PublicacionDTORequest> publicaciones;
 

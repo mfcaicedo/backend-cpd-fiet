@@ -13,7 +13,7 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGe
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarDocentes.mappers.DocenteMapperInfrastructureDomain;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTORequest.PublicacionDTORequest;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
-import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.mappers.PublicacionMapperInfrastructureDomain;
+import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.mappers.PublicacionIntMapperInfrastructureDomain;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -33,29 +33,32 @@ public class BeanConfiguration {
 
     //van todos los bean para los diferentes casos de uso
     @Bean
-    public ManagementDocenteCUAdapter createManagementDocenteCUInt(
-            ManagementDocenteGatewayIntPort managementDocenteGatewayIntPort,
-            DocenteFormatterResultsIntPort docenteFormatterResultsIntPort) {
-        ManagementDocenteCUAdapter managementDocenteCUAdapter = new ManagementDocenteCUAdapter(
-                managementDocenteGatewayIntPort, docenteFormatterResultsIntPort);
-        return managementDocenteCUAdapter;
+    public ManagementDocenteCUAdapter createManagementDocenteCUInt
+    (
+            ManagementDocenteGatewayIntPort gatewayDocente,
+            DocenteFormatterResultsIntPort docenteFormatterResultsIntPort
+    ){
+        ManagementDocenteCUAdapter gestionarDocenteCU = new ManagementDocenteCUAdapter(gatewayDocente,docenteFormatterResultsIntPort);
+        return gestionarDocenteCU;
     }
 
     @Bean
     public ManagementPublicacionCUAdapter createManagementPublicacionCUInt(
-            ManagementPublicacionGatewayIntPort managementPublicacionGatewayIntPort,
-            PublicacionFormatterResultsIntPort publicacionFormatterResultsIntPort,
-            ManagementDocenteGatewayIntPort managementDocenteGatewayIntPort
-    ) {
-        ManagementPublicacionCUAdapter managementPublicacionCUAdapter = new ManagementPublicacionCUAdapter(
-                managementPublicacionGatewayIntPort, publicacionFormatterResultsIntPort,
-                managementDocenteGatewayIntPort
-                );
-        return managementPublicacionCUAdapter;
+            ManagementPublicacionGatewayIntPort gatewayPublicacion,
+            ManagementDocenteGatewayIntPort gatewayDocente,
+            PublicacionFormatterResultsIntPort publicacionFormatterResultsIntPort
+    ){
+        ManagementPublicacionCUAdapter gestionarPublicacionCU = new ManagementPublicacionCUAdapter(
+                gatewayPublicacion,publicacionFormatterResultsIntPort,gatewayDocente
+        );
+        return gestionarPublicacionCU;
     }
 
+
+
+
     //configuracion de model mapper
-    @Bean
+    /*@Bean
     @Qualifier("docenteModelMapper")
     public ModelMapper docenteModelMapper(){
         return new ModelMapper();
@@ -70,44 +73,8 @@ public class BeanConfiguration {
     @Bean
     @Qualifier("publicacionModelMapper")
     public ModelMapper publicacionModelMapper(){ return new ModelMapper(); }
+*/
 
-    @Bean
-    public PublicacionMapperInfrastructureDomain publicacionMapperInfrastructureDomain(){
-        return new PublicacionMapperInfrastructureDomain() {
-            @Override
-            public Publicacion mapperRequestToPublicacion(PublicacionDTORequest request) {
-                return null;
-            }
-
-            @Override
-            public PublicacionDTOResponse mapperPublicacionToResponse(Publicacion publicacion) {
-                return null;
-            }
-
-            @Override
-            public List<PublicacionDTOResponse> mapperPublicacionesToResponse(List<Publicacion> publicaciones) {
-                return null;
-            }
-        };
-    }
-    @Bean
-    public DocenteMapperInfrastructureDomain docenteMapperInfrastructureDomain() {
-        return new DocenteMapperInfrastructureDomain() {
-            @Override
-            public Docente mapperRequestToDocente(DocenteDTORequest request) {
-                Docente docente = new Docente();
-                return docente;
-            }
-            @Override
-            public DocenteDTOResponse mapperDocenteToResponse(Docente docente) {
-                return null;
-            }
-            @Override
-            public List<DocenteDTOResponse> mapperDocentesToResponse(List<Docente> docentes) {
-                return null;
-            }
-        };
-    }
 
     @Bean
     public LocaleResolver localeResolver() {

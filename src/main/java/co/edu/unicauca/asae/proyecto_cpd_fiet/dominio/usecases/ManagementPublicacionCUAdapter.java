@@ -32,13 +32,15 @@ public class ManagementPublicacionCUAdapter implements ManagementPublicacionCUIn
     public Publicacion create(Publicacion publicacion) {
 
         List<Docente> autores = publicacion.getDocentes();
-
-        for ( Docente docente : autores ){
-            if(!managementDocenteGatewayIntPort.validarDocentePorCorreo(docente.getCorreo()) || docente.getCorreo().equalsIgnoreCase("")){
-                EntidadNoExisteException objException = new EntidadNoExisteException("No existe el autor" + docente.getNombres() + " para asociarlo a esta publicacion");
-                throw  objException;
+        if(!autores.isEmpty()){
+            for ( Docente docente : autores ){
+                if(!managementDocenteGatewayIntPort.validarDocentePorCorreo(docente.getCorreo()) || docente.getCorreo().equalsIgnoreCase("")){
+                    EntidadNoExisteException objException = new EntidadNoExisteException("No existe el autor" + docente.getNombres() + " para asociarlo a esta publicacion");
+                    throw  objException;
+                }
             }
         }
+
 
         if(this.managementPublicacionGateway.validarPublicacionByTitulo(publicacion.getTitulo())){
             EntidadYaExisteException objException = new EntidadYaExisteException("La publicación con titulo " + publicacion.getTitulo() + " ya existe");
@@ -76,14 +78,17 @@ public class ManagementPublicacionCUAdapter implements ManagementPublicacionCUIn
         //existe la publicaicon y el docente ?
         if(this.managementDocenteGatewayIntPort.validarDocentePorCorreo(correo)){
             if(this.managementPublicacionGateway.validarPublicacionByTitulo(titulo)){
+                System.out.println("#Existe publicaicon y autores");
                 //obtener publicaicon y docente y agregarlo a la lista de autores
                 Publicacion publicacion = this.managementPublicacionGateway.consultarPublicacionPorTitulo(titulo);
+                System.out.println("PUBLICACION ES "+ publicacion.toString());
                 Docente docente = this.managementDocenteGatewayIntPort.consultarDocentePorCorreo(correo);
 
                 publicacion.getDocentes().add(docente);
+                System.out.println(publicacion.getDocentes().get(0).getIdPersona());
 
-                this.managementPublicacionGateway.actualizar(publicacion);
-                return publicacion;
+
+                return this.managementPublicacionGateway.create(publicacion);
             }else{
                 EntidadNoExisteException objException = new EntidadNoExisteException("No existe publicacion con el titulo" + titulo );
                 throw  objException;

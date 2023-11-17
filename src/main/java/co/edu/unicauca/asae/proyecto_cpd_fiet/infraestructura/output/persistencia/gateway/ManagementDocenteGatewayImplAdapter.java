@@ -20,13 +20,13 @@ public class ManagementDocenteGatewayImplAdapter implements ManagementDocenteGat
     private final ModelMapper docenteModelMapper;
     private final DocenteRepository docenteRepository;
 
-    private final ModelMapper modelMapper;
+    //private final ModelMapper modelMapper;
     public ManagementDocenteGatewayImplAdapter(DocenteRepository docenteRepository,
-                                              @Qualifier("docenteModelMapper") ModelMapper docenteModelMapper,
-                                               @Qualifier("docenteModelMapperController") ModelMapper modelMapper) {
+                                               ModelMapper docenteModelMapper
+                                              ) {
         this.docenteRepository = docenteRepository;
         this.docenteModelMapper = docenteModelMapper;
-        this.modelMapper=modelMapper;
+
     }
 
     @Override
@@ -37,8 +37,8 @@ public class ManagementDocenteGatewayImplAdapter implements ManagementDocenteGat
     @Override
     public Docente create(Docente docente) {
 
-        DireccionEntity direccionEntity = modelMapper.map(docente.getDireccion(),DireccionEntity.class);
-        DocenteEntity docenteEntity = modelMapper.map(docente, DocenteEntity.class);
+        DireccionEntity direccionEntity = docenteModelMapper.map(docente.getDireccion(),DireccionEntity.class);
+        DocenteEntity docenteEntity = docenteModelMapper.map(docente, DocenteEntity.class);
 
         direccionEntity.setDocenteEntity(docenteEntity);
         docenteEntity.setDireccion(direccionEntity);
@@ -51,14 +51,14 @@ public class ManagementDocenteGatewayImplAdapter implements ManagementDocenteGat
 
     @Override
     public Docente consultarDocentePorCorreo(String correo) {
-        return null;
+        return this.docenteModelMapper.map(this.docenteRepository.findByCorreo(correo),Docente.class);
     }
 
     @Override
     public List<Docente> findAll() {
 
         Iterable<DocenteEntity> docentes = this.docenteRepository.findAll();
-        List<Docente> listDocentes = this.modelMapper.map(docentes, new TypeToken<List<Docente>>() {
+        List<Docente> listDocentes = this.docenteModelMapper.map(docentes, new TypeToken<List<Docente>>() {
         }.getType());
         return listDocentes;
 

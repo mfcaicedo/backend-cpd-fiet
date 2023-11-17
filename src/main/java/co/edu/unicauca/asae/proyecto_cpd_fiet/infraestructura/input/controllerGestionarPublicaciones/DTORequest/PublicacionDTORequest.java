@@ -9,6 +9,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -26,7 +27,7 @@ public class PublicacionDTORequest {
     @NotEmpty(message = "{publicacion.area.empty}")
     private String area;
 
-    //@NotEmpty(message = "{publicacion.tipo.empty}")
+    @NotNull(message = "{publicacion.tipo.empty}")
     private TipoDTORequest tipo;
 
     private List<DocenteDTORequest> docentes;

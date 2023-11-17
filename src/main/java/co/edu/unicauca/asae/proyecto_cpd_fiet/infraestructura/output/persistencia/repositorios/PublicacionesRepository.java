@@ -29,9 +29,11 @@ public interface PublicacionesRepository extends JpaRepository<PublicacionEntity
      * @param titulo titulo que vamos a buscar
      * @return true; si existe al menos 1 publicacion que cumpla ; false no encuentra publciaciones con titulo
      */
-    @Query("SELECT COUNT(p) > 0 FROM PublicacionEntity p WHERE LOWER(p.titulo) = LOWER(:titulo)")
+    //@Query("SELECT COUNT(p) > 0 FROM PublicacionEntity p WHERE LOWER(p.titulo) = LOWER(:titulo)")
     boolean existsByTitulo(@Param("titulo") String titulo);
 
     @Query("SELECT COUNT(p) > 0 FROM PublicacionEntity p WHERE p.idPublicacion = :id")
     boolean existsById(@Param("id") String id);
+
+    PublicacionEntity findByTitulo(String titulo);
 }

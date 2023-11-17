@@ -11,6 +11,7 @@ import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGe
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.input.controllerGestionarPublicaciones.DTOResponse.PublicacionDTOResponse;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DireccionEntity;
 import co.edu.unicauca.asae.proyecto_cpd_fiet.infraestructura.output.persistencia.entidades.DocenteEntity;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +26,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-//@Validated
+@Validated
+@RequiredArgsConstructor
 public class DocenteRestController {
     private final ManagementDocenteCUIntPort managementDocenteCUIntPort;
    // private final DocenteMapperInfrastructureDomain mapeadorDocente;
     private final ModelMapper modelMapper;
     // private final DocenteMapperInfrastructureDomain mapperRequestDocente;
 
-    @Autowired
-    public DocenteRestController(ManagementDocenteCUIntPort managementDocenteCUIntPort,
-                                @Qualifier("docenteModelMapperController") ModelMapper modelMapper) {
-        this.managementDocenteCUIntPort = managementDocenteCUIntPort;
-       // this.mapeadorDocente = mapeadorDocente;
-        this.modelMapper = modelMapper;
-    }
+
     @PostMapping("/docentes")
-    public ResponseEntity<DocenteDTOResponse> create(@RequestBody DocenteDTORequest docente) {
+    public ResponseEntity<DocenteDTOResponse> create(@Valid @RequestBody DocenteDTORequest docente) {
 
         Docente docenteCreate = modelMapper.map(docente, Docente.class);
         Docente docenteAux = managementDocenteCUIntPort.create(modelMapper.map(docenteCreate, Docente.class));
