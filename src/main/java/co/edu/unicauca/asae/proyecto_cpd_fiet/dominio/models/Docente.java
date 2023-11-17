@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Docente extends Persona{
+public class Docente extends Persona {
     private String correo;
     private String vinculacion;
     private String departamento;
